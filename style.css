@@ -4,7 +4,7 @@ body {
 	 */
   font: 100%/1.5 system-ui;
   .profile-photo {
-  width: 300px;
+  width: 400px;
   height: auto; /* Automatically adjusts height to prevent distortion */
 }
 }

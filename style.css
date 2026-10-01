@@ -3,4 +3,8 @@ body {
 	   and use the OS’s UI font as the website font
 	 */
   font: 100%/1.5 system-ui;
+  .profile-photo {
+  width: 300px;
+  height: auto; /* Automatically adjusts height to prevent distortion */
+}
 }

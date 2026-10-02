@@ -5,7 +5,7 @@ body {
   font: 100%/1.5 system-ui;
   .profile-photo {
     width: 100%;          /* Let the image take up the full width of its container... */
-    max-width: 400px;     /* ...but NEVER grow larger than 250px on big screens */
+    max-width: 600px;     /* ...but NEVER grow larger than 250px on big screens */
     height: auto;         /* Preserves the original aspect ratio so it doesn't stretch */
     display: block;       /* Prevents awkward inline text gaps */
 }

@@ -4,10 +4,12 @@ body {
 	 */
   font: 100%/1.5 system-ui;
   .profile-photo {
-  width: 400px;
-  height: auto; /* Automatically adjusts height to prevent distortion */
+    width: 100%;          /* Let the image take up the full width of its container... */
+    max-width: 400px;     /* ...but NEVER grow larger than 250px on big screens */
+    height: auto;         /* Preserves the original aspect ratio so it doesn't stretch */
+    display: block;       /* Prevents awkward inline text gaps */
 }
-}
+
 /* Layout the categories in a responsive grid */
 .skills-grid {
   display: grid;
@@ -16,23 +18,4 @@ body {
   margin-top: 1rem;
 }
 
-/* Style each skill category box */
-.skill-category {
-  background-color: #f8f9fa;
-  border-left: 4px solid #0066cc; /* Accent line on the left */
-  padding: 1rem 1.25rem;
-  border-radius: 6px;
-}
-
-.skill-category h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  color: #222;
-}
-
-.skill-category p {
-  margin: 0;
-  color: #555;
-  line-height: 1.5;
 }

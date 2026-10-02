@@ -6,14 +6,34 @@
     <title>Contacts</title>
 </head>
 <body>
-    <h1>My Contacts</h1>
     <nav>
         <ul>
             <li><a href="../index.html">Home</a></li>
             <li><a href="../projects/">Projects</a></li>
-            <li><a href="../contact/">Contact</a></li>
+            <li><a href="index.html">Contact</a></li>
+            <li><a href="../cv/">Resume</a></li>
             <li><a href="https://github.com/ctcrutchfield-stack" target="_blank">GitHub</a></li>
         </ul>
     </nav>
+    <h1>My Contacts</h1>
+    <form action = "mailto:ctcrutchfield@ucsd.edu" method = "POST" enctype = "text/plain">
+        <label>
+            Email:
+            <input type="email" name="email">
+        </label>
+
+        <label>
+            Subject:
+            <input name="subject">
+        </label>
+
+        <label>
+            Message:
+            <textarea name="body"></textarea>
+        </label>
+
+        <button>Send Message</button>
+    </form>
+
 </body>
 </html>

@@ -4,35 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacts</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="../index.html">Home</a></li>
             <li><a href="../projects/">Projects</a></li>
-            <li><a href="index.html">Contact</a></li>
+            <li><a href="index.html" class="current">Contact</a></li>
             <li><a href="../cv/">Resume</a></li>
             <li><a href="https://github.com/ctcrutchfield-stack" target="_blank">GitHub</a></li>
         </ul>
     </nav>
     <h1>My Contacts</h1>
-    <form action = "mailto:ctcrutchfield@ucsd.edu" method = "POST" enctype = "text/plain">
+    <form>
         <label>
-            Email:
-            <input type="email" name="email">
+         Name
+            <input type="text" name="name" required />
         </label>
 
         <label>
-            Subject:
-            <input name="subject">
+            Email
+            <input type="email" name="email" required />
         </label>
 
         <label>
-            Message:
-            <textarea name="body"></textarea>
+            Message
+            <textarea name="message" rows="4" required></textarea>
         </label>
 
-        <button>Send Message</button>
+        <button type="submit">Send</button>
     </form>
 
 </body>

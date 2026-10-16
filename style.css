@@ -1,7 +1,12 @@
 /* Step 2.4: Define custom property accent color on :root and inherit accent color */
 :root {
-  --color-accent: oklch(44.117% 0.13803 140.924);
+  --color-accent: oklch(55% 0.15 140);
   accent-color: var(--color-accent);
+}
+
+/* Step 4.1: Enable automatic light/dark mode based on OS settings */
+html {
+  color-scheme: light dark;
 }
 
 /* Body Layout & Typography */
@@ -12,20 +17,26 @@ body {
   padding-inline: 1rem;
 }
 
+/* Step 4.3: Top-right Dark Mode Selector */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+  font-family: inherit;
+}
+
+.color-scheme select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 /* Profile Photo */
 .profile-photo {
   width: 100%;
   max-width: 600px;
   height: auto;
   display: block;
-}
-
-/* Skills Grid */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
 }
 
 /* Step 2.1: Ignore <ul> and <li> wrappers */
@@ -38,7 +49,7 @@ nav li {
 nav {
   display: flex;
   margin-bottom: 1em;
-  border-bottom: 1px solid oklch(80% 3% 200);
+  border-bottom: 1px solid oklch(50% 10% 200 / 40%);
 }
 
 nav a {
@@ -52,7 +63,7 @@ nav a {
 /* Step 2.3: Active page styling */
 nav a.current {
   font-weight: bold;
-  border-bottom: 0.4em solid oklch(80% 3% 200);
+  border-bottom: 0.4em solid oklch(50% 10% 200 / 40%);
   padding-bottom: 0.1em;
 }
 
@@ -60,7 +71,7 @@ nav a.current {
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.1em;
-  background-color: oklch(from var(--color-accent) 95% 5% h);
+  background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
 }
 
 input,
@@ -123,7 +134,7 @@ section {
 
 section h2 {
   color: var(--color-accent);
-  border-bottom: 2px solid oklch(90% 2% 200);
+  border-bottom: 2px solid oklch(50% 10% 200 / 30%);
   padding-bottom: 0.2em;
   margin-top: 1.5em;
   margin-bottom: 0.75em;
@@ -139,10 +150,11 @@ hr {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.2rem;
+  margin-top: 1rem;
 }
 
 .skills-grid article {
-  background-color: oklch(from var(--color-accent) 98% 1% h);
+  background-color: color-mix(in oklch, var(--color-accent) 10%, transparent);
   border-left: 3px solid var(--color-accent);
   padding: 0.75em 1em;
   border-radius: 0 4px 4px 0;
@@ -172,14 +184,14 @@ header p {
 }
 
 time {
-  color: oklch(50% 0% 0); /* Subtle gray color for date ranges */
+  color: color-mix(in oklch, canvastext 60%, transparent); /* Adaptive subtle text color */
   font-size: 0.9em;
 }
 
 /* Inline code tags (e.g. scikit-learn, requests) */
 code {
   font-family: monospace;
-  background-color: oklch(94% 1% 200);
+  background-color: color-mix(in oklch, canvastext 10%, transparent);
   padding: 0.15em 0.4em;
   border-radius: 3px;
   font-size: 0.9em;

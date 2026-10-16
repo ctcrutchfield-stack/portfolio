@@ -6,55 +6,60 @@ function \$\$(selector, context = document) {
 }
 
 // -----------------------------------------------------------
-// Automatic Navigation Menu
+// STEP 3: Automatic Navigation Menu
 // -----------------------------------------------------------
 
-// Detect local vs GitHub Pages base path (Replace 'portfolio' with your repo name)
-const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"
-  : "/portfolio/"; 
+// Detect local vs GitHub Pages base path
+// Replace 'ctcrutchfield-stack' with your exact GitHub repository name if different
+const BASE_PATH =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1"
+    ? "/"
+    : "/ctcrutchfield-stack/";
 
 let pages = [
-  { url: '', title: 'Home' },
-  { url: 'projects/', title: 'Projects' },
-  { url: 'contact/', title: 'Contact' },
-  { url: 'https://github.com/your-username', title: 'GitHub' } 
+  { url: "", title: "Home" },
+  { url: "projects/", title: "Projects" },
+  { url: "contact/", title: "Contact" },
+  { url: "cv/", title: "Resume" },
+  { url: "https://github.com/ctcrutchfield-stack", title: "GitHub" },
 ];
 
-let nav = document.createElement('nav');
+let nav = document.createElement("nav");
 document.body.prepend(nav);
 
 for (let p of pages) {
   let url = p.url;
   let title = p.title;
 
-  if (!url.startsWith('http')) {
+  // Prefix relative URLs with BASE_PATH
+  if (!url.startsWith("http")) {
     url = BASE_PATH + url;
   }
 
-  let a = document.createElement('a');
+  let a = document.createElement("a");
   a.href = url;
   a.textContent = title;
 
-  // Highlight current page
+  // Step 3.2: Highlight current page link
   if (a.host === location.host && a.pathname === location.pathname) {
-    a.classList.add('current');
+    a.classList.add("current");
   }
 
-  // Open external links in a new tab
+  // Step 3.2: Open external links in a new tab
   if (a.host !== location.host) {
-    a.target = '_blank';
+    a.target = "_blank";
   }
 
   nav.append(a);
 }
 
 // -----------------------------------------------------------
-// Dark Mode Switcher & Persistence
+// STEP 4: Dark Mode Switcher & Persistence
 // -----------------------------------------------------------
 
+// Step 4.2: Add HTML for theme selector dropdown
 document.body.insertAdjacentHTML(
-  'afterbegin',
+  "afterbegin",
   `
   <label class="color-scheme">
     Theme:
@@ -67,19 +72,22 @@ document.body.insertAdjacentHTML(
   `
 );
 
-const select = document.querySelector('#theme-select');
+const select = document.querySelector("#theme-select");
 
+// Step 4.4: Function to apply color scheme
 function setColorScheme(colorScheme) {
-  document.documentElement.style.setProperty('color-scheme', colorScheme);
+  document.documentElement.style.setProperty("color-scheme", colorScheme);
   select.value = colorScheme;
 }
 
-select.addEventListener('input', function (event) {
+// Step 4.4: Save preference on selection change
+select.addEventListener("input", function (event) {
   const colorScheme = event.target.value;
   setColorScheme(colorScheme);
   localStorage.colorScheme = colorScheme;
 });
 
-if ('colorScheme' in localStorage) {
+// Step 4.5: Restore saved preference on load
+if ("colorScheme" in localStorage) {
   setColorScheme(localStorage.colorScheme);
 }

@@ -9,9 +9,7 @@ function $$(selector, context = document) {
 // STEP 3: Automatic Navigation Menu
 // -----------------------------------------------------------
 
-// Detect local vs GitHub Pages base path
-// Replace 'ctcrutchfield-stack' with your exact GitHub repository name if different
-// Detect local vs GitHub Pages base path
+// Detect local server vs GitHub Pages base path
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/"

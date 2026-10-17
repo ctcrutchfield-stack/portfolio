@@ -1,7 +1,7 @@
 console.log("IT'S ALIVE!");
 
 // Helper function to query multiple elements as an Array
-function \$\$(selector, context = document) {
+function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 

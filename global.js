@@ -11,10 +11,11 @@ function $$(selector, context = document) {
 
 // Detect local vs GitHub Pages base path
 // Replace 'ctcrutchfield-stack' with your exact GitHub repository name if different
+// Detect local vs GitHub Pages base path
 const BASE_PATH =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "/"
-    : "/ctcrutchfield-stack/";
+    : "/portfolio/";
 
 let pages = [
   { url: "", title: "Home" },

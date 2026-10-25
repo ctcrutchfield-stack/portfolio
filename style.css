@@ -123,6 +123,14 @@ h1 {
   grid-row: span 3;
 }
 
+/* FIX FOR IMAGE OVERFLOW */
+.projects img {
+  width: 100%;
+  height: 12em;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
 .projects h2 {
   margin: 0;
 }

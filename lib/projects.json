@@ -1,34 +1,34 @@
 
 [
   {
-    "title": "DSC 106 Project 1",
+    "title": "Food Processing Scores by Coportation",
     "year": 2024,
-    "image": "../images/dsc106_proj1.png",
-    "description": "Project description placeholder."
-  },
-  {
-    "title": "Anti-Stance Analysis",
-    "year": 2024,
-    "image": "../images/final_anti.png",
-    "description": "Project description placeholder."
+    "image": "images/dsc106_proj1.png",
+    "description": "A visual that compares the food processing scores of various corporations, highlighting their impact on public health and nutrition."
   },
   {
     "title": "Pro-Stance Analysis",
     "year": 2024,
-    "image": "../images/final_pro.png",
-    "description": "Project description placeholder."
+    "image": "images/final_anti.png",
+    "description": "Propisiton: Civilian police complaints against the NYPD are mainly violent and abusive. This project analyzes the nature of civilian complaints against the NYPD, focusing on the prevalence of violent and abusive incidents arguing that the majority of complaints are indeed violent and abusive in nature."
   },
   {
-    "title": "Spotify Data Analysis",
-    "year": 2023,
-    "image": "../images/Spotify.png",
-    "description": "Project description placeholder."
+    "title": "Anti-Stance Analysis",
+    "year": 2024,
+    "image": "images/final_pro.png",
+    "description": "Propisiton: Civilian police complaints against the NYPD are mainly violent and abusive. This project analyzes the nature of civilian complaints against the NYPD, focusing on the prevalence of non-violent and non-abusive incidents arguing that the majority of complaints are not violent and abusive in nature."
   },
   {
-    "title": "StockX Market Trends",
+    "title": "Spotify Explicitness Classifer",
     "year": 2023,
-    "image": "../images/StockX.png",
-    "description": "Project description placeholder."
+    "image": "images/Spotify.png",
+    "description": "A Random Forest model that classifies Spotify songs as explicit or non-explicit based on their lyrics and metadata. "
+  },
+  {
+    "title": "StockX Resale Value Predictor",
+    "year": 2023,
+    "image": "images/StockX.png",
+    "description": "A machine learning model that predicts the resale value of items listed on StockX based on historical sales data and market trends."
   },
   {
     "title": "Exploratory Data Analysis - World Bank Data",

@@ -1,0 +1,75 @@
+
+[
+  {
+    "title": "DSC 106 Project 1",
+    "year": 2024,
+    "image": "../images/dsc106_proj1.png",
+    "description": "Project description placeholder."
+  },
+  {
+    "title": "Anti-Stance Analysis",
+    "year": 2024,
+    "image": "../images/final_anti.png",
+    "description": "Project description placeholder."
+  },
+  {
+    "title": "Pro-Stance Analysis",
+    "year": 2024,
+    "image": "../images/final_pro.png",
+    "description": "Project description placeholder."
+  },
+  {
+    "title": "Spotify Data Analysis",
+    "year": 2023,
+    "image": "../images/Spotify.png",
+    "description": "Project description placeholder."
+  },
+  {
+    "title": "StockX Market Trends",
+    "year": 2023,
+    "image": "../images/StockX.png",
+    "description": "Project description placeholder."
+  },
+  {
+    "title": "Exploratory Data Analysis - World Bank Data",
+    "year": 2022,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project analyzing global socioeconomic indicators using Pandas and Seaborn."
+  },
+  {
+    "title": "Statistical Inference & Modeling",
+    "year": 2022,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project evaluating hypothesis testing and linear regression models."
+  },
+  {
+    "title": "Database Systems & SQL Queries",
+    "year": 2023,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project designing relational database schemas and executing complex SQL joins."
+  },
+  {
+    "title": "Machine Learning Classification Model",
+    "year": 2024,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project implementing random forest and logistic regression models for prediction."
+  },
+  {
+    "title": "Interactive Web Dashboard",
+    "year": 2024,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project creating custom interactive charts and dynamic layout components."
+  },
+  {
+    "title": "Natural Language Processing Analysis",
+    "year": 2025,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project parsing unstructured text data and generating sentiment analysis scores."
+  },
+  {
+    "title": "Geospatial Data Visualization",
+    "year": 2025,
+    "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+    "description": "Placeholder project mapping spatial datasets and visual density distributions across regions."
+  }
+]

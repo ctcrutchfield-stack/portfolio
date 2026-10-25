@@ -90,3 +90,57 @@ select.addEventListener("input", function (event) {
 if ("colorScheme" in localStorage) {
   setColorScheme(localStorage.colorScheme);
 }
+
+export async function fetchJSON(url) {
+  try {
+    const response = await fetch(url);
+    
+    // Step 1.2 requirement: inspect the response object
+    console.log('Fetch Response Object:', response);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+  }
+}
+
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  if (!containerElement) return;
+
+  containerElement.innerHTML = '';
+
+  if (!projects || projects.length === 0) {
+    containerElement.innerHTML = '<p>No projects found.</p>';
+    return;
+  }
+
+  // Check if current page is inside a subfolder
+  const isSubfolder = window.location.pathname.includes('/projects/');
+
+  for (let project of projects) {
+    const article = document.createElement('article');
+
+    // Fix image URL for subfolders if it's a relative path and doesn't start with http
+    let imagePath = project.image;
+    if (isSubfolder && !imagePath.startsWith('http') && !imagePath.startsWith('../')) {
+      imagePath = `../${imagePath}`;
+    }
+
+    article.innerHTML = `
+      <${headingLevel}>${project.title}</${headingLevel}>
+      <img src="${imagePath}" alt="${project.title}">
+      <p>${project.description}</p>
+    `;
+
+    containerElement.appendChild(article);
+  }
+}
+export async function fetchGitHubData(username) {
+  // Reuses your existing fetchJSON helper to call the public GitHub API
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}

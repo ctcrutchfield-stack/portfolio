@@ -204,3 +204,84 @@ code {
   border-radius: 3px;
   font-size: 0.9em;
 }
+
+/* Step 0.1: Project Year Typography */
+.project-year {
+  font-family: Baskerville, serif;
+  font-variant-numeric: oldstyle-nums;
+  color: color-mix(in oklch, canvastext 60%, transparent);
+}
+
+/* -----------------------------------------------------------
+   LAB 5: PIE CHART & LEGEND STYLING
+   ----------------------------------------------------------- */
+
+/* Step 2.3: Lay out pie chart and legend side-by-side */
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+/* Step 1.1: Pie chart SVG sizing */
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+/* Step 5.1: Interactive cursor and transitions for pie wedges */
+#projects-pie-plot path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+#projects-pie-plot path:hover {
+  opacity: 0.8;
+}
+
+/* Step 5.2: Highlighted wedge styling */
+#projects-pie-plot path.selected {
+  stroke: canvastext;
+  stroke-width: 2px;
+  opacity: 1;
+}
+
+/* Step 2.2: Legend layout and swatches */
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.legend-item.selected {
+  font-weight: bold;
+}
+
+/* Swatch circle indicator */
+.swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Step 4.1: Search Bar Styling */
+.search-bar {
+  width: 100%;
+  padding: 0.5em 0.75em;
+  margin-block-end: 2em;
+}

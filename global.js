@@ -18,6 +18,7 @@ const BASE_PATH =
 let pages = [
   { url: "", title: "Home" },
   { url: "projects/", title: "Projects" },
+  { url: "meta/", title: "Meta" },
   { url: "contact/", title: "Contact" },
   { url: "cv/", title: "Resume" },
   { url: "https://github.com/ctcrutchfield-stack", title: "GitHub" },

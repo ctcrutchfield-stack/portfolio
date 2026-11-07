@@ -38,24 +38,23 @@ function processCommits(data) {
 
 const commits = processCommits(data);
 
-// Step 1.3: Render summary stats
+// Step 1.3: Render summary stats formatted properly with div cards
 function displayStats(data, commits) {
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
-  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(data.length);
+  const statsData = [
+    { label: 'Total <abbr title="Lines of code">LOC</abbr>', value: data.length },
+    { label: 'Total commits', value: commits.length },
+    { label: 'Number of files', value: d3.group(data, (d) => d.file).size },
+    { label: 'Max depth', value: d3.max(data, (d) => d.depth) },
+    { label: 'Longest line length', value: d3.max(data, (d) => d.length) },
+  ];
 
-  dl.append('dt').text('Total commits');
-  dl.append('dd').text(commits.length);
-
-  dl.append('dt').text('Number of files');
-  dl.append('dd').text(d3.group(data, (d) => d.file).size);
-
-  dl.append('dt').text('Max depth');
-  dl.append('dd').text(d3.max(data, (d) => d.depth));
-
-  dl.append('dt').text('Longest line length');
-  dl.append('dd').text(d3.max(data, (d) => d.length));
+  statsData.forEach((stat) => {
+    const div = dl.append('div').attr('class', 'stat-card');
+    div.append('dt').html(stat.label);
+    div.append('dd').text(stat.value);
+  });
 }
 
 // Step 2, 4 & 5: Render quantitative scatterplot with brushing
@@ -98,6 +97,7 @@ function renderScatterplot(data, commits) {
   const xAxis = d3.axisBottom(xScale);
   const yAxis = d3.axisLeft(yScale).tickFormat((d) => `${String(d).padStart(2, '0')}:00`);
 
+  // Fixed Syntax Error Here
   svg
     .append('g')
     .attr('transform', `translate(0, ${height - margin.bottom})`)
@@ -108,10 +108,13 @@ function renderScatterplot(data, commits) {
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(yAxis);
 
-  // Dots
-  const dots = svg.append('g').attr('class', 'dots');
+  // Brush Group
+  const brushGroup = svg.append('g').attr('class', 'brush');
 
-  dots
+  // Dots Group
+  const dotsGroup = svg.append('g').attr('class', 'dots');
+
+  const dots = dotsGroup
     .selectAll('circle')
     .data(sortedCommits)
     .join('circle')
@@ -135,10 +138,9 @@ function renderScatterplot(data, commits) {
       updateTooltipVisibility(false);
     });
 
-  // Step 5: D3 Brush Setup
+  // Attach D3 Brush
   const brush = d3.brush().on('start brush end', brushed);
-  svg.append('g').attr('class', 'brush').call(brush);
-  svg.selectAll('.dots').raise();
+  brushGroup.call(brush);
 
   function brushed(event) {
     const selection = event.selection;
@@ -153,13 +155,13 @@ function renderScatterplot(data, commits) {
     updateLanguageBreakdown(selectedCommits);
   }
 
-  function isCommitSelected(selection, commit) {
-    if (!selection) return false;
-    const [[x0, y0], [x1, y1]] = selection;
-    const cx = xScale(commit.datetime);
-    const cy = yScale(commit.hourFrac);
+    function isCommitSelected(selection, commit) {
+        if (!selection) return false;
+        const [[x0, y0], [x1, y1]] = selection;
+        const cx = xScale(commit.datetime);
+        const cy = yScale(commit.hourFrac);
 
-    return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
+        return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
   }
 }
 
@@ -220,8 +222,10 @@ function updateLanguageBreakdown(selectedCommits) {
     const formatted = d3.format('.1%')(proportion);
 
     container.innerHTML += `
-      <dt>${language}</dt>
-      <dd>${count} lines (${formatted})</dd>
+      <div class="stat-card">
+        <dt>${language}</dt>
+        <dd>${count} lines (${formatted})</dd>
+      </div>
     `;
   }
 }

@@ -1,4 +1,4 @@
-/* Step 2.4: Define custom property accent color on :root and inherit accent color */
+/* Step 2.4: Custom property accent color on :root and inherit accent color */
 :root {
   --color-accent: oklch(55% 0.15 140);
   accent-color: var(--color-accent);
@@ -87,15 +87,13 @@ form {
   gap: 1em;
 }
 
-/* Make labels span full grid width and adopt parent grid columns */
 form label {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
-  align-items: center; /* Vertically aligns label text with the input */
+  align-items: center;
 }
 
-/* Make standalone buttons span full grid width */
 form button {
   grid-column: 1 / -1;
 }
@@ -107,10 +105,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 400%; /* Creates strong visual contrast against body text and h2 */
+  font-size: 400%;
 }
 
-/* Step 4.2 & 4.3: Projects Grid and Horizontal Row Alignment */
+/* Step 4.2 & 4.3: Projects Grid */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
@@ -123,7 +121,6 @@ h1 {
   grid-row: span 3;
 }
 
-/* FIX FOR IMAGE OVERFLOW */
 .projects img {
   width: 100%;
   height: 12em;
@@ -148,9 +145,8 @@ section h2 {
   margin-bottom: 0.75em;
 }
 
-/* Cleanup standard horizontal rules */
 hr {
-  display: none; /* Replaces plain <hr> lines with sleek CSS borders */
+  display: none;
 }
 
 /* Skills Grid Layout */
@@ -192,11 +188,10 @@ header p {
 }
 
 time {
-  color: color-mix(in oklch, canvastext 60%, transparent); /* Adaptive subtle text color */
+  color: color-mix(in oklch, canvastext 60%, transparent);
   font-size: 0.9em;
 }
 
-/* Inline code tags (e.g. scikit-learn, requests) */
 code {
   font-family: monospace;
   background-color: color-mix(in oklch, canvastext 10%, transparent);
@@ -205,7 +200,6 @@ code {
   font-size: 0.9em;
 }
 
-/* Step 0.1: Project Year Typography */
 .project-year {
   font-family: Baskerville, serif;
   font-variant-numeric: oldstyle-nums;
@@ -216,21 +210,18 @@ code {
    LAB 5: PIE CHART & LEGEND STYLING
    ----------------------------------------------------------- */
 
-/* Step 2.3: Lay out pie chart and legend side-by-side */
 .container {
   display: flex;
   align-items: center;
   gap: 2em;
 }
 
-/* Step 1.1: Pie chart SVG sizing */
 #projects-pie-plot {
   max-width: 20em;
   margin-block: 2em;
   overflow: visible;
 }
 
-/* Step 5.1: Interactive cursor and transitions for pie wedges */
 #projects-pie-plot path {
   transition: 300ms;
   cursor: pointer;
@@ -240,14 +231,12 @@ code {
   opacity: 0.8;
 }
 
-/* Step 5.2: Highlighted wedge styling */
 #projects-pie-plot path.selected {
   stroke: canvastext;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* Step 2.2: Legend layout and swatches */
 .legend {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
@@ -270,7 +259,6 @@ code {
   font-weight: bold;
 }
 
-/* Swatch circle indicator */
 .swatch {
   display: inline-block;
   width: 1em;
@@ -279,19 +267,46 @@ code {
   flex-shrink: 0;
 }
 
-/* Step 4.1: Search Bar Styling */
 .search-bar {
   width: 100%;
   padding: 0.5em 0.75em;
   margin-block-end: 2em;
 }
 
-/* Stats summary display */
+/* -----------------------------------------------------------
+   LAB 6: D3 META ANALYSIS & BRUSH STYLING
+   ----------------------------------------------------------- */
+
+/* Summary Stats Cards Grid */
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 2rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: color-mix(in oklch, canvastext 5%, transparent);
+  border: 1px solid color-mix(in oklch, canvastext 15%, transparent);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.stat-card dt {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card dd {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: 0;
 }
 
 /* Floating Tooltip */
@@ -301,7 +316,8 @@ code {
   left: 0;
   padding: 0.75rem 1rem;
   background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #111111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -310,7 +326,7 @@ code {
 
 /* Chart Gridlines */
 .gridlines line {
-  stroke: #e0e0e0;
+  stroke: color-mix(in oklch, canvastext 20%, transparent);
   stroke-dasharray: 2 2;
 }
 
@@ -318,19 +334,29 @@ code {
   display: none;
 }
 
-circle {
-  transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
+/* Base Dot Transitions */
+#chart circle {
+  transition: fill 200ms ease, fill-opacity 200ms ease, r 200ms ease;
+  pointer-events: all;
 }
 
-circle.selected {
+/* High-specificity selection rule to ensure dots turn bright red */
+#chart circle.selected,
+svg circle.selected {
   fill: #ff6b6b !important;
+  fill-opacity: 1 !important;
+  stroke: #ffffff !important;
+  stroke-width: 1.5px !important;
 }
 
-/* Style selection area */
-.selection {
-  fill-opacity: 0.1;
-  stroke: #ff6b6b;
-  stroke-dasharray: 5 5;
+/* D3 Brush Overlay Rectangle */
+.brush .overlay {
+  pointer-events: all;
+}
+
+.brush .selection {
+  fill: #ff6b6b !important;
+  fill-opacity: 0.25 !important;
+  stroke: #ff6b6b !important;
+  stroke-dasharray: 4 4 !important;
 }

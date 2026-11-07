@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meta Analysis</title>
   <link rel="stylesheet" href="../style.css">
-  <!-- Load global.js to render navigation bar and dark mode theme switcher -->
+  <!-- Global site script (nav menu & theme switcher) -->
   <script type="module" src="../global.js"></script>
-  <!-- Load main.js for D3 stats and scatterplot -->
+  <!-- D3 visualization logic for Lab 06 -->
   <script type="module" src="main.js"></script>
 </head>
 <body>
@@ -19,6 +19,10 @@
   <!-- Quantitative Scatterplot Chart -->
   <h2>Commits by Time of Day</h2>
   <div id="chart"></div>
+
+  <!-- Brush Selection Results -->
+  <p id="selection-count">No commits selected</p>
+  <dl id="language-breakdown" class="stats"></dl>
 
   <!-- Hover Tooltip -->
   <dl id="commit-tooltip" class="info tooltip" hidden>

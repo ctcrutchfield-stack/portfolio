@@ -23,7 +23,7 @@ function processCommits(data) {
 
     return {
       id: commit,
-      url: 'https://github.com/YOUR_USERNAME/YOUR_REPO/commit/' + commit,
+      url: 'https://github.com/ctcrutchfield-stack/portfolio/commit/' + commit,
       author,
       date,
       time,
@@ -58,7 +58,7 @@ function displayStats(data, commits) {
   dl.append('dd').text(d3.max(data, (d) => d.length));
 }
 
-// Step 2 & 4: Render quantitative scatterplot
+// Step 2, 4 & 5: Render quantitative scatterplot with brushing
 function renderScatterplot(data, commits) {
   const width = 1000;
   const height = 600;
@@ -70,7 +70,7 @@ function renderScatterplot(data, commits) {
     .attr('viewBox', `0 0 ${width} ${height}`)
     .style('overflow', 'visible');
 
-  // X and Y Scales
+  // Scales
   const xScale = d3
     .scaleTime()
     .domain(d3.extent(commits, (d) => d.datetime))
@@ -82,14 +82,12 @@ function renderScatterplot(data, commits) {
     .domain([0, 24])
     .range([height - margin.bottom, margin.top]);
 
-  // Step 4: Radius scale for area perception
   const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
   const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([3, 20]);
 
-  // Sort commits so smaller circles sit on top of larger ones
   const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
-  // Horizontal Grid Lines
+  // Grid lines
   svg
     .append('g')
     .attr('class', 'gridlines')
@@ -136,9 +134,36 @@ function renderScatterplot(data, commits) {
       updateTooltipContent({});
       updateTooltipVisibility(false);
     });
+
+  // Step 5: D3 Brush Setup
+  const brush = d3.brush().on('start brush end', brushed);
+  svg.append('g').attr('class', 'brush').call(brush);
+  svg.selectAll('.dots').raise();
+
+  function brushed(event) {
+    const selection = event.selection;
+
+    dots.selectAll('circle').classed('selected', (d) => isCommitSelected(selection, d));
+
+    const selectedCommits = selection
+      ? commits.filter((d) => isCommitSelected(selection, d))
+      : [];
+
+    updateSelectionCount(selectedCommits);
+    updateLanguageBreakdown(selectedCommits);
+  }
+
+  function isCommitSelected(selection, commit) {
+    if (!selection) return false;
+    const [[x0, y0], [x1, y1]] = selection;
+    const cx = xScale(commit.datetime);
+    const cy = yScale(commit.hourFrac);
+
+    return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
+  }
 }
 
-// Step 3: Tooltip functions
+// Step 3: Tooltip Helpers
 function updateTooltipContent(commit) {
   const link = document.getElementById('commit-link');
   const date = document.getElementById('commit-date');
@@ -169,6 +194,38 @@ function updateTooltipPosition(event) {
   tooltip.style.top = `${event.clientY + 10}px`;
 }
 
-// Initialize
+// Step 5: Brush Helpers
+function updateSelectionCount(selectedCommits) {
+  const countElement = document.getElementById('selection-count');
+  countElement.textContent = `${selectedCommits.length || 'No'} commits selected`;
+}
+
+function updateLanguageBreakdown(selectedCommits) {
+  const container = document.getElementById('language-breakdown');
+  if (selectedCommits.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const lines = selectedCommits.flatMap((d) => d.lines);
+  const breakdown = d3.rollup(
+    lines,
+    (v) => v.length,
+    (d) => d.type
+  );
+
+  container.innerHTML = '';
+  for (const [language, count] of breakdown) {
+    const proportion = count / lines.length;
+    const formatted = d3.format('.1%')(proportion);
+
+    container.innerHTML += `
+      <dt>${language}</dt>
+      <dd>${count} lines (${formatted})</dd>
+    `;
+  }
+}
+
+// Run initial rendering
 displayStats(data, commits);
 renderScatterplot(data, commits);

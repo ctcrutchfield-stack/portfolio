@@ -317,3 +317,20 @@ code {
 .gridlines path {
   display: none;
 }
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle.selected {
+  fill: #ff6b6b !important;
+}
+
+/* Style selection area */
+.selection {
+  fill-opacity: 0.1;
+  stroke: #ff6b6b;
+  stroke-dasharray: 5 5;
+}

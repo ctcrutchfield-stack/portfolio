@@ -335,28 +335,22 @@ code {
 }
 
 /* Base Dot Transitions */
+/* Ensure circles animate smoothly and react to CSS selection */
 #chart circle {
-  transition: fill 200ms ease, fill-opacity 200ms ease, r 200ms ease;
-  pointer-events: all;
+  transition: fill 200ms, fill-opacity 200ms;
 }
 
-/* High-specificity selection rule to ensure dots turn bright red */
-#chart circle.selected,
-svg circle.selected {
+/* Force selected dots to turn bright red */
+#chart circle.selected {
   fill: #ff6b6b !important;
   fill-opacity: 1 !important;
-  stroke: #ffffff !important;
-  stroke-width: 1.5px !important;
 }
 
-/* D3 Brush Overlay Rectangle */
-.brush .overlay {
-  pointer-events: all;
-}
-
+/* Allow mouse events to pass through the brush box onto dots below */
 .brush .selection {
-  fill: #ff6b6b !important;
-  fill-opacity: 0.25 !important;
-  stroke: #ff6b6b !important;
-  stroke-dasharray: 4 4 !important;
+  fill: #ff6b6b;
+  fill-opacity: 0.2;
+  stroke: #ff6b6b;
+  stroke-dasharray: 5 5;
+  pointer-events: none;
 }

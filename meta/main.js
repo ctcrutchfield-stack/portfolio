@@ -38,7 +38,7 @@ function processCommits(data) {
 
 const commits = processCommits(data);
 
-// Step 1.3: Render summary stats formatted properly with div cards
+// Step 1.3: Render summary stats formatted properly with stat cards
 function displayStats(data, commits) {
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
@@ -57,6 +57,7 @@ function displayStats(data, commits) {
   });
 }
 
+// Step 2, 4 & 5: Render quantitative scatterplot with brushing
 // Step 2, 4 & 5: Render quantitative scatterplot with brushing
 function renderScatterplot(data, commits) {
   const width = 1000;
@@ -86,7 +87,7 @@ function renderScatterplot(data, commits) {
 
   const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
-  // Grid lines
+  // Gridlines
   svg
     .append('g')
     .attr('class', 'gridlines')
@@ -97,7 +98,6 @@ function renderScatterplot(data, commits) {
   const xAxis = d3.axisBottom(xScale);
   const yAxis = d3.axisLeft(yScale).tickFormat((d) => `${String(d).padStart(2, '0')}:00`);
 
-  // Fixed Syntax Error Here
   svg
     .append('g')
     .attr('transform', `translate(0, ${height - margin.bottom})`)
@@ -108,12 +108,11 @@ function renderScatterplot(data, commits) {
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(yAxis);
 
-  // Brush Group
+  // Layer groups: create dotsGroup first so dots sit under the brush layer
+  const dotsGroup = svg.append('g').attr('class', 'dots');
   const brushGroup = svg.append('g').attr('class', 'brush');
 
-  // Dots Group
-  const dotsGroup = svg.append('g').attr('class', 'dots');
-
+  // Render dots
   const dots = dotsGroup
     .selectAll('circle')
     .data(sortedCommits)
@@ -122,7 +121,7 @@ function renderScatterplot(data, commits) {
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
     .attr('fill', 'steelblue')
-    .style('fill-opacity', 0.7)
+    .attr('fill-opacity', 0.7)
     .on('mouseenter', (event, d) => {
       d3.select(event.currentTarget).style('fill-opacity', 1);
       updateTooltipContent(d);
@@ -145,7 +144,11 @@ function renderScatterplot(data, commits) {
   function brushed(event) {
     const selection = event.selection;
 
-    dots.selectAll('circle').classed('selected', (d) => isCommitSelected(selection, d));
+    // Direct color update for selected dots via JavaScript inline styles
+    dots.selectAll('circle')
+      .classed('selected', (d) => isCommitSelected(selection, d))
+      .style('fill', (d) => isCommitSelected(selection, d) ? '#ff6b6b' : 'steelblue')
+      .style('fill-opacity', (d) => isCommitSelected(selection, d) ? 1 : 0.7);
 
     const selectedCommits = selection
       ? commits.filter((d) => isCommitSelected(selection, d))
@@ -155,13 +158,13 @@ function renderScatterplot(data, commits) {
     updateLanguageBreakdown(selectedCommits);
   }
 
-    function isCommitSelected(selection, commit) {
-        if (!selection) return false;
-        const [[x0, y0], [x1, y1]] = selection;
-        const cx = xScale(commit.datetime);
-        const cy = yScale(commit.hourFrac);
+  function isCommitSelected(selection, commit) {
+    if (!selection) return false;
+    const [[x0, y0], [x1, y1]] = selection;
+    const cx = xScale(commit.datetime);
+    const cy = yScale(commit.hourFrac);
 
-        return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
+    return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
   }
 }
 

@@ -7,22 +7,40 @@
   <link rel="stylesheet" href="../style.css">
   <!-- Global site script (nav menu & theme switcher) -->
   <script type="module" src="../global.js"></script>
-  <!-- D3 visualization logic for Lab 06 -->
+  <!-- D3 visualization logic for Lab 06 & Lab 08 -->
   <script type="module" src="main.js"></script>
 </head>
 <body>
   <h1>Codebase Meta-Analysis</h1>
 
+  <!-- Lab 8 Step 1.1: Filtering UI -->
+  <div class="slider-container">
+    <label for="commit-progress">
+      Show commits until:
+      <input type="range" id="commit-progress" min="0" max="100" value="100">
+      <time id="commit-time"></time>
+    </label>
+  </div>
+
   <!-- Summary Statistics -->
   <div id="stats"></div>
 
-  <!-- Quantitative Scatterplot Chart -->
+  <!-- Lab 8 Step 3.1: Scrollytelling Container -->
   <h2>Commits by Time of Day</h2>
-  <div id="chart"></div>
+  <div id="scrolly-1">
+    <div id="scatter-story"></div>
+    <div id="scatter-plot">
+      <div id="chart"></div>
 
-  <!-- Brush Selection Results -->
-  <p id="selection-count">No commits selected</p>
-  <dl id="language-breakdown" class="stats"></dl>
+      <!-- Brush Selection Results -->
+      <p id="selection-count">No commits selected</p>
+      <dl id="language-breakdown" class="stats"></dl>
+    </div>
+  </div>
+
+  <!-- Lab 8 Step 2.1 & 3.1: Unit Visualization for Files -->
+  <h2>Codebase File Sizes</h2>
+  <dl id="files"></dl>
 
   <!-- Hover Tooltip -->
   <dl id="commit-tooltip" class="info tooltip" hidden>

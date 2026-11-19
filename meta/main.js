@@ -16,7 +16,7 @@ async function loadData() {
 
 const data = await loadData();
 
-// Step 1.2: Process raw lines into commit objects (sorted chronologically for Lab 8)
+// Step 1.2: Process raw lines into commit objects (sorted chronologically)
 function processCommits(data) {
   return d3
     .groups(data, (d) => d.commit)
@@ -41,17 +41,6 @@ function processCommits(data) {
 }
 
 const commits = processCommits(data);
-
-// Lab 8 State Variables
-let commitProgress = 100;
-let timeScale = d3
-  .scaleTime()
-  .domain([
-    d3.min(commits, (d) => d.datetime),
-    d3.max(commits, (d) => d.datetime),
-  ])
-  .range([0, 100]);
-let commitMaxTime = timeScale.invert(commitProgress);
 let filteredCommits = commits;
 
 // Shared Scales for Scatterplot
@@ -59,10 +48,10 @@ let xScale;
 let yScale;
 let rScale;
 
-// Color scale for unit visualization (Lab 8 Step 2.4)
+// Color scale for unit visualization (Step 2.4)
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-// Step 1.3: Render summary stats formatted properly with stat cards
+// Render summary stats formatted properly with stat cards
 function displayStats(data, commits) {
   const statsContainer = d3.select('#stats');
   statsContainer.html('');
@@ -141,7 +130,7 @@ function renderScatterplot(data, commits) {
   const dotsGroup = svg.append('g').attr('class', 'dots');
   const brushGroup = svg.append('g').attr('class', 'brush');
 
-  // Render dots with key function (Lab 8 Step 1.3) and --r variable (Lab 8 Step 1.4)
+  // Render dots with key function (Step 1.3) and --r variable (Step 1.4)
   dotsGroup
     .selectAll('circle')
     .data(sortedCommits, (d) => d.id)
@@ -198,12 +187,8 @@ function renderScatterplot(data, commits) {
   }
 }
 
-// Lab 8 Step 1.2 & 1.3: Update existing Scatterplot
+// Step 1.2 & 1.3: Update existing Scatterplot
 function updateScatterplot(data, commits) {
-  const width = 1000;
-  const height = 600;
-  const margin = { top: 10, right: 10, bottom: 30, left: 50 };
-
   const svg = d3.select('#chart').select('svg');
 
   xScale = xScale.domain(d3.extent(commits, (d) => d.datetime)).nice();
@@ -246,9 +231,9 @@ function updateScatterplot(data, commits) {
     });
 }
 
-// Lab 8 Step 2.1 - 2.4: Update Unit Visualization for File Sizes
-function updateFileDisplay(filteredCommits) {
-  let lines = filteredCommits.flatMap((d) => d.lines);
+// Step 2.1 - 2.4: Update Unit Visualization for File Sizes
+function updateFileDisplay(commitsSubset) {
+  let lines = commitsSubset.flatMap((d) => d.lines);
   let files = d3
     .groups(lines, (d) => d.file)
     .map(([name, lines]) => {
@@ -281,29 +266,7 @@ function updateFileDisplay(filteredCommits) {
     .attr('style', (d) => `--color: ${colors(d.type)}`);
 }
 
-// Lab 8 Step 1.1 & 1.2: Slider Change Handler
-function onTimeSliderChange() {
-  const slider = document.getElementById('commit-progress');
-  commitProgress = Number(slider.value);
-  commitMaxTime = timeScale.invert(commitProgress);
-
-  const timeElement = document.getElementById('commit-time');
-  timeElement.textContent = commitMaxTime.toLocaleString('en', {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  });
-
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
-  displayStats(data, filteredCommits);
-  updateScatterplot(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
-}
-
-document
-  .getElementById('commit-progress')
-  .addEventListener('input', onTimeSliderChange);
-
-// Step 3: Tooltip Helpers
+// Tooltip Helpers
 function updateTooltipContent(commit) {
   const link = document.getElementById('commit-link');
   const date = document.getElementById('commit-date');
@@ -334,7 +297,7 @@ function updateTooltipPosition(event) {
   tooltip.style.top = `${event.clientY + 10}px`;
 }
 
-// Step 5: Brush Helpers
+// Brush Helpers
 function updateSelectionCount(selectedCommits) {
   const countElement = document.getElementById('selection-count');
   countElement.textContent = `${selectedCommits.length || 'No'} commits selected`;
@@ -368,61 +331,87 @@ function updateLanguageBreakdown(selectedCommits) {
   }
 }
 
+// Helper to render clean narrative cards for both scrollytelling sections
+function renderStorySteps(containerSelector) {
+  d3.select(containerSelector)
+    .selectAll('.step')
+    .data(commits)
+    .join('div')
+    .attr('class', 'step')
+    .html((d, i) => {
+      const fileCount = d3.rollups(
+        d.lines,
+        (D) => D.length,
+        (d) => d.file
+      ).length;
+      const formattedDate = d.datetime.toLocaleString('en', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      });
+
+      return `
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">${i === 0 ? 'Initial Commit' : `Commit #${i + 1}`}</span>
+            <time>${formattedDate}</time>
+          </div>
+          <p>
+            Pushed <a href="${d.url}" target="_blank"><code>${d.id.slice(0, 7)}</code></a>:
+            updated <strong>${d.totalLines} lines</strong> across <strong>${fileCount} ${
+              fileCount === 1 ? 'file' : 'files'
+            }</strong>.
+          </p>
+        </div>
+      `;
+    });
+}
+
 // Run initial rendering
 displayStats(data, commits);
 renderScatterplot(data, commits);
-onTimeSliderChange();
+updateFileDisplay(commits);
 
-// Lab 8 Step 3.2: Generate Commit Narrative Text
-d3.select('#scatter-story')
-  .selectAll('.step')
-  .data(commits)
-  .join('div')
-  .attr('class', 'step')
-  .html(
-    (d, i) => `
-      <p>
-        On ${d.datetime.toLocaleString('en', {
-          dateStyle: 'full',
-          timeStyle: 'short',
-        })},
-        I made <a href="${d.url}" target="_blank">${
-          i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
-        }</a>.
-        I edited ${d.totalLines} lines across ${
-          d3.rollups(
-            d.lines,
-            (D) => D.length,
-            (d) => d.file
-          ).length
-        } files.
-        Then I looked over all I had made, and I saw that it was very good.
-      </p>
-    `
-  );
+// Populate both narrative columns
+renderStorySteps('#scatter-story');
+renderStorySteps('#files-story');
 
-// Lab 8 Step 3.3: Scrollama Scrollytelling Setup
-function onStepEnter(response) {
+// Step 3.3: Scrollama for Scatterplot (#scrolly-1)
+function onScatterStepEnter(response) {
   const commit = response.element.__data__;
-  commitMaxTime = commit.datetime;
-  commitProgress = timeScale(commitMaxTime);
+  filteredCommits = commits.filter((d) => d.datetime <= commit.datetime);
 
-  document.getElementById('commit-progress').value = commitProgress;
-  document.getElementById('commit-time').textContent = commitMaxTime.toLocaleString('en', {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  });
+  d3.select('#scatter-story')
+    .selectAll('.step')
+    .classed('is-active', (d) => d.id === commit.id);
 
-  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   displayStats(data, filteredCommits);
   updateScatterplot(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
 }
 
-const scroller = scrollama();
-scroller
+const scatterScroller = scrollama();
+scatterScroller
   .setup({
     container: '#scrolly-1',
     step: '#scrolly-1 .step',
   })
-  .onStepEnter(onStepEnter);
+  .onStepEnter(onScatterStepEnter);
+
+// Step 4: Scrollama for File Sizes Unit Visualization (#scrolly-2)
+function onFilesStepEnter(response) {
+  const commit = response.element.__data__;
+  const fileFilteredCommits = commits.filter((d) => d.datetime <= commit.datetime);
+
+  d3.select('#files-story')
+    .selectAll('.step')
+    .classed('is-active', (d) => d.id === commit.id);
+
+  updateFileDisplay(fileFilteredCommits);
+}
+
+const filesScroller = scrollama();
+filesScroller
+  .setup({
+    container: '#scrolly-2',
+    step: '#scrolly-2 .step',
+  })
+  .onStepEnter(onFilesStepEnter);

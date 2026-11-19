@@ -13,23 +13,14 @@
 <body>
   <h1>Codebase Meta-Analysis</h1>
 
-  <!-- Lab 8 Step 1.1: Filtering UI -->
-  <div class="slider-container">
-    <label for="commit-progress">
-      Show commits until:
-      <input type="range" id="commit-progress" min="0" max="100" value="100">
-      <time id="commit-time"></time>
-    </label>
-  </div>
-
   <!-- Summary Statistics -->
   <div id="stats"></div>
 
-  <!-- Lab 8 Step 3.1: Scrollytelling Container -->
+  <!-- Scrollytelling Part 1: Commits Scatterplot -->
   <h2>Commits by Time of Day</h2>
-  <div id="scrolly-1">
-    <div id="scatter-story"></div>
-    <div id="scatter-plot">
+  <div id="scrolly-1" class="scrolly-container">
+    <div id="scatter-story" class="story-column"></div>
+    <div id="scatter-plot" class="sticky-visual">
       <div id="chart"></div>
 
       <!-- Brush Selection Results -->
@@ -38,9 +29,14 @@
     </div>
   </div>
 
-  <!-- Lab 8 Step 2.1 & 3.1: Unit Visualization for Files -->
+  <!-- Scrollytelling Part 2 (Step 4): Unit Visualization for File Sizes -->
   <h2>Codebase File Sizes</h2>
-  <dl id="files"></dl>
+  <div id="scrolly-2" class="scrolly-container">
+    <div id="files-story" class="story-column"></div>
+    <div id="files-container" class="sticky-visual">
+      <dl id="files"></dl>
+    </div>
+  </div>
 
   <!-- Hover Tooltip -->
   <dl id="commit-tooltip" class="info tooltip" hidden>

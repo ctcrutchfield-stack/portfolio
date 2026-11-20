@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Canyon Crutchfield — Resume</title>
     <link rel="stylesheet" href="../style.css">
     <!-- Inside subpages like projects/index.html -->
     <script src="../global.js" type="module"></script>
 </head>
 <body>
     <h1>Resume</h1>
+    <p>Canyon Crutchfield · Los Gatos, CA · <a href="mailto:canyon.crutch@gmail.com">canyon.crutch@gmail.com</a> · 408-442-2965 · <a href="https://ctcrutchfield-stack.github.io/portfolio/">Portfolio</a></p>
     <section>
         <h2>Summary</h2>
         <article>Data Science student at UC San Diego with a 3.86 GPA,
@@ -52,7 +53,7 @@
   
          <div>
             <article>
-            <h4>Pursuing B.S in Data Science @ University of California - San Diego | 3.86 GPA</h4>
+            <h4>Pursuing B.S in Data Science @ University of California - San Diego | 3.86 GPA | Expected June 2028</h4>
             <p>6 consecutive Provost Honors Awards, Member of Pi Kappa Alpha Fraternity</p>
             </article>
 
@@ -67,22 +68,30 @@
     <section>
         <h2>Side Projects</h2>
 
-        <article">
+        <article>
         <h3>MLB Regular Season Performance Model</h3>
         <p>Developed predictive models utilizing gradient descent and advanced regression techniques to evaluate and forecast team performance analytics.</p>
         </article>
 
 
         <article>
-        <h3>StockX Price Predictor</h3>
-        <p>Constructed automated data retrieval pipelines via StockX API using <code>requests</code> and <code>regex</code> to model median shoe pricing trends using multivariate linear regression.</p>
+        <h3>Sneaker Resale Premium on StockX</h3>
+        <p>Predicted StockX resale premium from product and market features using 327 SKUs and 1,635 sneaker-size observations (KicksDB, Jan–May 2026; StockX Pricing Data API). Grouped cross-validation R² was near zero (best sensitivity model, with retail price, mean CV R² = 0.049); a classifier for beating retail reached held-out ROC-AUC 0.646. See <a href="https://github.com/canyoncrutch-coder/SNEAKER_RESALE_PREMIUM_PROJECT">SNEAKER_RESALE_PREMIUM_PROJECT</a>.</p>
         </article>
 
-
+        <article>
+        <h3>Spotify Explicitness Classifier</h3>
+        <p>Predict whether a Spotify track is explicit from its audio features, using 18,000 tracks across five genre groups. A Random Forest (n_estimators=200, max_depth=20) reached test F1 ~0.64, up from a logistic-regression baseline of 0.24. See <a href="https://github.com/canyoncrutch-coder/spotify-explicitness-classifier">spotify-explicitness-classifier</a>.</p>
+        </article>
 
         <article>
-        <h3>Spotify Song Energy &amp; Genre Classifier</h3>
-        <p>Implemented machine learning classifiers using <code>scikit-learn</code> to analyze Spotify audio features, predicting song energy and categorizing genres.</p>
+        <h3>Bikewatching — Boston Bluebikes Geospatial Map</h3>
+        <p>Interactive Mapbox + D3 map of Boston and Cambridge Bluebikes stations, with bike-lane GeoJSON, March 2024 trip data, a time slider, and station circles sized by total traffic and coloured by departure/arrival flow. See <a href="https://github.com/ctcrutchfield-stack/bikewatching">bikewatching</a>.</p>
+        </article>
+
+        <article>
+        <h3>California Wildfire Thermal Anomaly Tracker</h3>
+        <p>Interactive D3 map of NOAA GOES-18 satellite thermal detections across California, July 24–August 6, 2024, with hourly time scrubbing, water-vapour contours, and Fire Radiative Power for the Park Fire region. See <a href="https://github.com/ctcrutchfield-stack/dsc-project-3">dsc-project-3</a>.</p>
         </article>
         <hr>
     </section>
@@ -101,6 +110,7 @@
         <ul>
         <li>Architected end-to-end data pipelines using Google Apps Script, Jira API, and Looker Studio to deliver real-time executive visibility into software epics and machine fleet allocation.</li>
         <li>Deployed event-driven n8n webhooks and automated workflows to track datacenter host uptime and infer ticket metadata, streamlining issue resolution workflows.</li>
+        <li>Built an n8n workflow tracking all models in training and bring-up, giving senior AI software engineers and TPMs a shared progress view.</li>
         <li>Expanded internal TPM status tooling by integrating legal contract data via Model Context Protocol (MCP), enabling unified tracking of legal requests alongside software and hardware issues.</li>
         </ul>
     </article>

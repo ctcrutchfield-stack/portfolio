@@ -255,7 +255,7 @@ function updateFileDisplay(commitsSubset) {
 
   filesContainer
     .select('dt')
-    .html((d) => `<code>${d.name}</code><small>${d.lines.length} lines</small>`);
+    .html((d) => `<code>${d.name}</code><small>${d.lines.length} line${d.lines.length === 1 ? "" : "s"}</small>`);
 
   filesContainer
     .select('dd')

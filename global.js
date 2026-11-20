@@ -18,11 +18,12 @@ const BASE_PATH =
 let pages = [
   { url: "", title: "Home" },
   { url: "projects/", title: "Projects" },
-  { url: "meta/", title: "Meta" },
   { url: "contact/", title: "Contact" },
   { url: "cv/", title: "Resume" },
   { url: "https://github.com/ctcrutchfield-stack", title: "GitHub" },
 ];
+// Note: the Meta (codebase analysis) page is intentionally not in the nav —
+// it was a class lab with stale commit stats. The files remain in meta/.
 
 let nav = document.createElement("nav");
 document.body.prepend(nav);
@@ -139,9 +140,10 @@ export function renderProjects(
   for (let project of projects) {
     const article = document.createElement("article");
 
-    // Fix image URL for subfolders if it's a relative path and doesn't start with http
-    let imagePath = project.image;
+    // Fix relative URLs for subfolders (images and internal links like cv/)
+    let imagePath = project.image || "";
     if (
+      imagePath &&
       isSubfolder &&
       !imagePath.startsWith("http") &&
       !imagePath.startsWith("../")
@@ -149,13 +151,32 @@ export function renderProjects(
       imagePath = `../${imagePath}`;
     }
 
+    let linkUrl = project.url || "";
+    if (
+      linkUrl &&
+      isSubfolder &&
+      !linkUrl.startsWith("http") &&
+      !linkUrl.startsWith("../")
+    ) {
+      linkUrl = `../${linkUrl}`;
+    }
+    const isExternal = linkUrl.startsWith("http");
+    const linkLabel = project.urlLabel || "View code →";
+
     // Wrap description and year inside a container div per Step 0.1 instructions
     article.innerHTML = `
       <${headingLevel}>${project.title}</${headingLevel}>
-      <img src="${imagePath}" alt="${project.title}">
+      ${imagePath ? `<img src="${imagePath}" alt="${project.title}">` : ""}
       <div>
         <p>${project.description}</p>
         <p class="project-year">${project.year || ""}</p>
+        ${
+          linkUrl
+            ? `<p><a class="project-link" href="${linkUrl}"${
+                isExternal ? ' target="_blank" rel="noopener"' : ""
+              }>${linkLabel}</a></p>`
+            : ""
+        }
       </div>
     `;
 

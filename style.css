@@ -24,6 +24,10 @@ body {
   right: 1rem;
   font-size: 80%;
   font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  white-space: nowrap;
 }
 
 .color-scheme select {
@@ -31,12 +35,21 @@ body {
   font-size: inherit;
 }
 
-/* Profile Photo */
-.profile-photo {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  display: block;
+/* Home intro and project links */
+.intro {
+  font-size: 1.1em;
+}
+
+.intro-links {
+  margin-block: 1em;
+}
+
+.project-link {
+  font-weight: 600;
+}
+
+.projects article a {
+  color: var(--color-accent);
 }
 
 /* Step 2.1: Ignore <ul> and <li> wrappers */

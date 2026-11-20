@@ -1,1 +1,56 @@
-[{"description":"Agentic Technical Program Manager Intern, Santa Clara, CA (Jul–Sep 2026). Built Apps Script, Jira API, and Looker Studio pipelines giving executives real-time visibility into software epics and machine-fleet allocation; built event-driven n8n workflows tracking datacenter host uptime and models in training and bring-up; integrated legal contract data via an MCP endpoint into internal status tooling.","title":"Tenstorrent — Agentic TPM Internship","url":"cv/","urlLabel":"See Resume","year":2026},{"description":"Can a sneaker's StockX resale premium be predicted from product and market features? 327 SKUs and 1,635 sneaker-size observations from KicksDB (Jan–May 2026) via the StockX Pricing Data API. Median premium was 0.92; grouped cross-validation R² was near zero (best sensitivity model, with retail price, mean CV R² = 0.049), and a classifier for beating retail reached held-out ROC-AUC 0.646. Product features alone only weakly predict premium — an honest, useful result.","image":"images/StockX.png","title":"Sneaker Resale Premium on StockX","url":"https://github.com/canyoncrutch-coder/SNEAKER_RESALE_PREMIUM_PROJECT","year":2026},{"description":"Predict whether a Spotify track is explicit from its audio features. 18,000 tracks across five genre groups (urban, metal, electronic, acoustic, latin). A Random Forest (n_estimators=200, max_depth=20) reached test F1 ~0.64, up from a logistic-regression baseline of 0.24. By Canyon Crutchfield and Nate McNeill.","image":"images/Spotify.png","title":"Spotify Explicitness Classifier","url":"https://github.com/canyoncrutch-coder/spotify-explicitness-classifier","year":2025},{"description":"Interactive Mapbox + D3 map of Boston and Cambridge Bluebikes stations. Boston and Cambridge bike-lane GeoJSON, March 2024 trip data, a time slider, and station circles sized by total traffic and coloured by departure/arrival flow.","title":"Bikewatching — Boston Bluebikes Geospatial Map","url":"https://github.com/ctcrutchfield-stack/bikewatching","year":2026},{"description":"DSC Project 3. Interactive D3 map of NOAA GOES-18 satellite thermal detections across California, July 24–August 6, 2024, with hourly time scrubbing, water-vapour contours, and Fire Radiative Power (MW) for the Park Fire region. Canyon cleaned the satellite data in Python and converted fire detections to geographic coordinates.","title":"California Wildfire Thermal Anomaly Tracker","url":"https://github.com/ctcrutchfield-stack/dsc-project-3","year":2024},{"description":"Predictive models using gradient descent and regression techniques to evaluate and forecast MLB team performance.","title":"MLB Regular-Season Performance Model","url":"cv/","urlLabel":"See Resume","year":2025},{"description":"A visual that compares the food processing scores of various corporations, highlighting their impact on public health and nutrition.","image":"images/dsc106_proj1.png","title":"Food Processing Scores by Corporation","year":2026},{"description":"Proposition: civilian police complaints against the NYPD are mainly violent and abusive. NLP analysis of pro- and anti-stance TikTok videos and civilian complaint data, testing whether the majority of complaints are violent and abusive. Python, pandas, matplotlib, seaborn.","image":"images/final_pro.png","title":"Pro/Anti-Stance NYPD Proposition: Identifying the Narrative","year":2026}]
+[
+  {
+    "description": "<strong>Legal / topsheet tracker.</strong> Built the live legal source for the topsheet tracker by integrating legal contract data via a Model Context Protocol (MCP) endpoint into internal TPM status tooling. Contract requests are now tracked alongside software and hardware issues in one place.<br><br><strong>Machine fleet health.</strong> Built an event-driven n8n workflow tracking datacenter host uptime, and Looker Studio dashboards giving executives real-time visibility into machine-fleet allocation. The same pipelines, built with Google Apps Script, the Jira API, and Looker Studio, also give executives real-time visibility into software epics.<br><br><strong>Models in training and bring-up.</strong> Built an n8n workflow tracking all models in training and bring-up. It gives senior AI software engineers and TPMs a shared progress view of every model in flight.",
+    "title": "Tenstorrent \u2014 Agentic TPM Internship",
+    "url": "cv/",
+    "urlLabel": "See Resume",
+    "year": 2026
+  },
+  {
+    "description": "Can a sneaker's StockX resale premium be predicted from product and market features? 327 SKUs and 1,635 sneaker-size observations from KicksDB (Jan\u2013May 2026) via the StockX Pricing Data API. Median premium was 0.92; grouped cross-validation R\u00b2 was near zero (best sensitivity model, with retail price, mean CV R\u00b2 = 0.049), and a classifier for beating retail reached held-out ROC-AUC 0.646. Product features alone only weakly predict premium \u2014 an honest, useful result.",
+    "image": "images/StockX.png",
+    "title": "Sneaker Resale Premium on StockX",
+    "url": "https://github.com/canyoncrutch-coder/SNEAKER_RESALE_PREMIUM_PROJECT",
+    "year": 2026
+  },
+  {
+    "description": "Predict whether a Spotify track is explicit from its audio features. 18,000 tracks across five genre groups (urban, metal, electronic, acoustic, latin). A Random Forest (n_estimators=200, max_depth=20) reached test F1 ~0.64, up from a logistic-regression baseline of 0.24. By Canyon Crutchfield and Nate McNeill.",
+    "image": "images/Spotify.png",
+    "title": "Spotify Explicitness Classifier",
+    "url": "https://github.com/canyoncrutch-coder/spotify-explicitness-classifier",
+    "year": 2025
+  },
+  {
+    "description": "Interactive Mapbox + D3 map of Boston and Cambridge Bluebikes stations. Boston and Cambridge bike-lane GeoJSON, March 2024 trip data, a time slider, and station circles sized by total traffic and coloured by departure/arrival flow. Live demo: <a href=\"https://ctcrutchfield-stack.github.io/bikewatching/\" target=\"_blank\" rel=\"noopener\">ctcrutchfield-stack.github.io/bikewatching</a>.",
+    "image": "images/bikewatching.png",
+    "title": "Bikewatching \u2014 Boston Bluebikes Geospatial Map",
+    "url": "https://github.com/ctcrutchfield-stack/bikewatching",
+    "year": 2026
+  },
+  {
+    "description": "DSC Project 3. Interactive D3 map of NOAA GOES-18 satellite thermal detections across California, July 24\u2013August 6, 2024, with hourly time scrubbing, water-vapour contours, and Fire Radiative Power (MW) for the Park Fire region. Canyon cleaned the satellite data in Python and converted fire detections to geographic coordinates. Live demo: <a href=\"https://ctcrutchfield-stack.github.io/dsc-project-3/\" target=\"_blank\" rel=\"noopener\">ctcrutchfield-stack.github.io/dsc-project-3</a>.",
+    "image": "images/project3.png",
+    "title": "California Wildfire Thermal Anomaly Tracker",
+    "url": "https://github.com/ctcrutchfield-stack/dsc-project-3",
+    "year": 2024
+  },
+  {
+    "description": "Predictive models using gradient descent and regression techniques to evaluate and forecast MLB team performance.",
+    "title": "MLB Regular-Season Performance Model",
+    "url": "cv/",
+    "urlLabel": "See Resume",
+    "year": 2025
+  },
+  {
+    "description": "A visual that compares the food processing scores of various corporations, highlighting their impact on public health and nutrition.",
+    "image": "images/dsc106_proj1.png",
+    "title": "Food Processing Scores by Corporation",
+    "year": 2026
+  },
+  {
+    "description": "Proposition: civilian police complaints against the NYPD are mainly violent and abusive. NLP analysis of pro- and anti-stance TikTok videos and civilian complaint data, testing whether the majority of complaints are violent and abusive. Python, pandas, matplotlib, seaborn.",
+    "image": "images/final_pro.png",
+    "title": "Pro/Anti-Stance NYPD Proposition: Identifying the Narrative",
+    "year": 2026
+  }
+]

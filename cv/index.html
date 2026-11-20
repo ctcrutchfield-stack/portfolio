@@ -86,12 +86,12 @@
 
         <article>
         <h3>Bikewatching — Boston Bluebikes Geospatial Map</h3>
-        <p>Interactive Mapbox + D3 map of Boston and Cambridge Bluebikes stations, with bike-lane GeoJSON, March 2024 trip data, a time slider, and station circles sized by total traffic and coloured by departure/arrival flow. See <a href="https://github.com/ctcrutchfield-stack/bikewatching">bikewatching</a>.</p>
+        <p>Interactive Mapbox + D3 map of Boston and Cambridge Bluebikes stations, with bike-lane GeoJSON, March 2024 trip data, a time slider, and station circles sized by total traffic and coloured by departure/arrival flow. Live demo: <a href="https://ctcrutchfield-stack.github.io/bikewatching/">ctcrutchfield-stack.github.io/bikewatching</a>. See <a href="https://github.com/ctcrutchfield-stack/bikewatching">bikewatching</a>.</p>
         </article>
 
         <article>
         <h3>California Wildfire Thermal Anomaly Tracker</h3>
-        <p>Interactive D3 map of NOAA GOES-18 satellite thermal detections across California, July 24–August 6, 2024, with hourly time scrubbing, water-vapour contours, and Fire Radiative Power for the Park Fire region. See <a href="https://github.com/ctcrutchfield-stack/dsc-project-3">dsc-project-3</a>.</p>
+        <p>Interactive D3 map of NOAA GOES-18 satellite thermal detections across California, July 24–August 6, 2024, with hourly time scrubbing, water-vapour contours, and Fire Radiative Power for the Park Fire region. Live demo: <a href="https://ctcrutchfield-stack.github.io/dsc-project-3/">ctcrutchfield-stack.github.io/dsc-project-3</a>. See <a href="https://github.com/ctcrutchfield-stack/dsc-project-3">dsc-project-3</a>.</p>
         </article>
         <hr>
     </section>
@@ -107,12 +107,20 @@
         </p>
         </header>
 
-        <ul>
-        <li>Architected end-to-end data pipelines using Google Apps Script, Jira API, and Looker Studio to deliver real-time executive visibility into software epics and machine fleet allocation.</li>
-        <li>Deployed event-driven n8n webhooks and automated workflows to track datacenter host uptime and infer ticket metadata, streamlining issue resolution workflows.</li>
-        <li>Built an n8n workflow tracking all models in training and bring-up, giving senior AI software engineers and TPMs a shared progress view.</li>
-        <li>Expanded internal TPM status tooling by integrating legal contract data via Model Context Protocol (MCP), enabling unified tracking of legal requests alongside software and hardware issues.</li>
-        </ul>
+        <div class="tenstorrent-project">
+        <h4>Legal / topsheet tracker</h4>
+        <p>Built the live legal source for the topsheet tracker by integrating legal contract data via a Model Context Protocol (MCP) endpoint into internal TPM status tooling. Legal requests are now tracked in one place alongside software and hardware issues.</p>
+        </div>
+
+        <div class="tenstorrent-project">
+        <h4>Machine fleet health</h4>
+        <p>Deployed event-driven n8n webhooks and automated workflows to track datacenter host uptime and infer ticket metadata, streamlining issue resolution workflows. Built end-to-end data pipelines using Google Apps Script, the Jira API, and Looker Studio, delivering real-time executive visibility into machine-fleet allocation and software epics via a Looker Studio dashboard.</p>
+        </div>
+
+        <div class="tenstorrent-project">
+        <h4>Models in training and bring-up</h4>
+        <p>Built an n8n workflow tracking all models in training and bring-up. It gives senior AI software engineers and TPMs a shared progress view of every model in flight.</p>
+        </div>
     </article>
 
         <article>

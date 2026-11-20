@@ -35,13 +35,16 @@ body {
   font-size: inherit;
 }
 
-/* Home intro and project links */
+/* Home intro */
 .intro {
   font-size: 1.1em;
+  margin-bottom: 0.75em;
 }
 
-.intro-links {
-  margin-block: 1em;
+/* Space between the home intro text and the Latest Projects heading */
+h2 + .projects,
+.projects {
+  margin-top: 0.75em;
 }
 
 .project-link {
@@ -134,15 +137,30 @@ h1 {
   grid-row: span 3;
 }
 
+/* Keep images from crowding the text below them */
 .projects img {
   width: 100%;
   height: 12em;
   object-fit: cover;
   border-radius: 6px;
+  margin-bottom: 0.75em;
 }
 
 .projects h2 {
-  margin: 0;
+  margin: 0 0 0.5em;
+}
+
+.projects article p {
+  margin-block: 0.4em 0.6em;
+}
+
+.projects article .project-year {
+  margin-top: 0.5em;
+}
+
+.projects article .project-link {
+  display: inline-block;
+  margin-top: 0.5em;
 }
 
 /* Section & Heading Accents */
@@ -160,6 +178,19 @@ section h2 {
 
 hr {
   display: none;
+}
+
+/* Tenstorrent subsections on the Resume page */
+.tenstorrent-project {
+  margin-bottom: 1em;
+}
+
+.tenstorrent-project h4 {
+  margin-bottom: 0.25em;
+}
+
+.tenstorrent-project p {
+  margin-top: 0.25em;
 }
 
 /* Skills Grid Layout */
